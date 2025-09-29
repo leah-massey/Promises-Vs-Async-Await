@@ -23,10 +23,29 @@ function getPostTitles(): Promise<string[]> {
   });
 }
 
-getPostTitles()
-  .then((titles) => {
-    console.log("titles:", titles);
-  })
-  .catch((error) => {
-    console.log("this is an error", error);
-  });
+function displayTitlesPromise() {
+  getPostTitles()
+    .then((titles) => {
+      console.log("--- PROMISE CHAINING RESULT ---");
+      console.log("titles:", titles);
+    })
+    .catch((error) => {
+      console.log("--- PROMISE CHAINING RESULT ---");
+      console.log("this is an error", error);
+    });
+}
+
+// preferred way
+async function displayTitlesAsync() {
+  try {
+    const titles = await getPostTitles();
+    console.log("--- ASYNC / AWAIT response ---");
+    console.log(titles);
+  } catch (error: any) {
+    console.log("--- ASYNC / AWAIT response ---");
+    console.log("Error: ", error);
+  }
+}
+
+displayTitlesPromise();
+displayTitlesAsync();
